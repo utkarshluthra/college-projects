@@ -37,9 +37,9 @@ class Parser:
 		MONTH =int(calendarList[1])
 		if MONTH <= 3 :
 			QUARTER = "Q1"
-		if MONTH in [3,6] :
+		if MONTH in [4,5,6] :
 			QUARTER = "Q2"
-		if MONTH in [6,9]:
+		if MONTH in [7,8,9]:
 			QUARTER = "Q3"
 		else:
 			QUARTER ="Q4"
