@@ -1,4 +1,4 @@
-from pprint import pprint
+#COMMENTS REQUIRED HERE
 def rid_tags(mainstr,delim1="<",delim2=">"): #separate function to detect and delete data between two specific points
     while delim1 in mainstr and delim2 in mainstr[mainstr.index(delim1):]:
         index1 = mainstr.index(delim1)
@@ -8,11 +8,14 @@ def rid_tags(mainstr,delim1="<",delim2=">"): #separate function to detect and de
         mainstr = mainstr.replace(deletestr,"")
     return mainstr
 
+#COMMENTS REQUIRED HERE
 def defile(filename):
 	#creates file if it doesnt exist. clears data if it exists
 	defi = open(filename,"w",encoding="utf-8")
 	defi.writelines("")
 	defi.close()
+
+#COMMENTS REQUIRED HERE
 def preprocessLine(inputLine):
 	inputLine=inputLine.replace("&amp;","&")  #changes &amp; to &
 	inputLine=inputLine.replace("&quot;","\"") #changes &quot; to "
@@ -26,6 +29,7 @@ def preprocessLine(inputLine):
 	
 	return inputLine
 
+#COMMENTS REQUIRED HERE
 def splitFile(inputFile, outputFile_question, outputFile_answer):
 	defile(outputFile_question) #creating/clearing question output file
 	defile(outputFile_answer) #creating/clearing answer output file
@@ -58,14 +62,9 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
 			answerer.writelines(elementdesc)
 			answerer.writelines("\n")
 		a+=1
-
-	#preprocess the original file, and split them into two files.
-
-	#please call preprocessLine() function within this function
-	#write you code here
 	pass
 
-
+#COMMENTS REQUIRED HERE
 def cleanlist(elementList):
 	for element in elementList:
 		indexer = elementList.index(element)
@@ -82,4 +81,3 @@ if __name__ == "__main__":
 	f_answer = "answer.txt"
 
 	splitFile(f_data, f_question, f_answer)
-

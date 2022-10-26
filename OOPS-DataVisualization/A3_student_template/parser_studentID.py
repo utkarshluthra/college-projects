@@ -1,6 +1,4 @@
-
 from preprocessData_studentID import cleanlist, preprocessLine, rid_tags
-from pprint import pprint
 
 class Parser:
 	"""docstring for ClassName"""
@@ -12,31 +10,12 @@ class Parser:
 		self.cleanBody = self.getCleanedBody()
 		self.Vocabularysize = self.getVocabularySize()
 		
-		input()
 	def __str__(self):
-		pprint([self.ID,self.type,self.dateQuarter,self.cleanBody,self.Vocabularysize])
-		input()
-		
-		# printingstring = ''
-		# processedData = (preprocessLine(self.inputString))
-		# data_split = processedData.split(maxsplit= 3)
-		# data_split= cleanlist(data_split)
-		# for element in data_split:
-		# 	elementlst = element.split("=")
-			
-		# 	printingdata = elementlst[-1]
-		# 	printingstring += printingdata
-		# 	printingstring += "\n" 
-		# print(printingstring)
-
-		#print ID, Question/Answer/Others, creation date, the main content
-		#write your code here
+		print("{};;;{};;;{};;;{};;;".format(self.ID, self.type, self.dateQuarter, self.cleanBody, self.Vocabularysize))		
 		
 	def getID(self):
 		proclist = (self.inputString.split(maxsplit=4))
-#		print(proclist)
 		ROWID = int(((proclist[1].split("="))[-1])[1:-1])
-		
 		return ROWID
 
 	def getPostType(self):
@@ -58,9 +37,9 @@ class Parser:
 		MONTH =int(calendarList[1])
 		if MONTH <= 3 :
 			QUARTER = "Q1"
-		if MONTH <= 6 and MONTH > 3 :
+		if MONTH in [3,6] :
 			QUARTER = "Q2"
-		if MONTH <= 9 and MONTH>6:
+		if MONTH in [6,9]:
 			QUARTER = "Q3"
 		else:
 			QUARTER ="Q4"
@@ -71,10 +50,7 @@ class Parser:
 	def getCleanedBody(self):
 		line = rid_tags(preprocessLine(self.inputString))
 		line = line[2:-6]
-
-		return line
-		#write your code here
-		
+		return line		
 
 	def getVocabularySize(self):
 		from string import punctuation
