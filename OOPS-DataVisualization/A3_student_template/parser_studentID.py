@@ -1,4 +1,6 @@
+
 from preprocessData_studentID import cleanlist, preprocessLine, rid_tags
+from pprint import pprint
 
 class Parser:
 	"""docstring for ClassName"""
@@ -11,11 +13,31 @@ class Parser:
 		self.Vocabularysize = self.getVocabularySize()
 		
 	def __str__(self):
-		print("{};;;{};;;{};;;{};;;".format(self.ID, self.type, self.dateQuarter, self.cleanBody, self.Vocabularysize))		
+		pprint([self.ID,self.type,self.dateQuarter,self.cleanBody,self.Vocabularysize])
+		input()
+		
+		# printingstring = ''
+		# processedData = (preprocessLine(self.inputString))
+		# data_split = processedData.split(maxsplit= 3)
+		# data_split= cleanlist(data_split)
+		# for element in data_split:
+		# 	elementlst = element.split("=")
+			
+		# 	printingdata = elementlst[-1]
+		# 	printingstring += printingdata
+		# 	printingstring += "\n" 
+		# print(printingstring)
+
+		#print ID, Question/Answer/Others, creation date, the main content
+		#write your code here
 		
 	def getID(self):
 		proclist = (self.inputString.split(maxsplit=4))
-		ROWID = int(((proclist[1].split("="))[-1])[1:-1])
+#		print(proclist)
+		try:
+			ROWID = int(((proclist[1].split("="))[-1])[1:-1])
+		except IndexError:
+			print(proclist)
 		return ROWID
 
 	def getPostType(self):
@@ -23,7 +45,7 @@ class Parser:
 		POSTID = int(((proclist[2].split("="))[-1])[1])
 		if POSTID == 1:
 			posttype = "Question"
-		if POSTID == 2:
+		elif POSTID == 2:
 			posttype = "Answer"
 		else:
 			posttype = "Others"	
@@ -37,9 +59,9 @@ class Parser:
 		MONTH =int(calendarList[1])
 		if MONTH <= 3 :
 			QUARTER = "Q1"
-		if MONTH in [4,5,6] :
+		if MONTH <= 6 and MONTH > 3 :
 			QUARTER = "Q2"
-		if MONTH in [7,8,9]:
+		if MONTH <= 9 and MONTH>6:
 			QUARTER = "Q3"
 		else:
 			QUARTER ="Q4"
@@ -50,14 +72,13 @@ class Parser:
 	def getCleanedBody(self):
 		line = rid_tags(preprocessLine(self.inputString))
 		line = line[2:-6]
-		return line		
+
+		return line
+		#write your code here
+		
 
 	def getVocabularySize(self):
-		from string import punctuation
-		forbidden =list(punctuation)
-		forbidden.append('')
-		forbidden.append('\n')
-		
+		forbidden = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~','','\n']
 		vocabline = self.getCleanedBody()
 		vocablist = vocabline.split(" ")
 		for elements in vocablist:
@@ -76,13 +97,3 @@ class Parser:
 			if newelements not in newlist and len(newelements)!=0:
 				newlist.append(newelements)
 		return(len(newlist))
-if __name__ == '__main__':
-	reader = open("data.xml","r",encoding="utf-8")
-	a=2
-	readerdata = reader.readlines()
-	while a<len(readerdata):
-		readerline = readerdata[a]	
-		data = Parser(readerline)
-		data.__str__()
-		a+=1
-		
