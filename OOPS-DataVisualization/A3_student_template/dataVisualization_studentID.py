@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from parser_studentID import Parser
-from pprint import pprint
+
 def visualizeWordDistribution(inputFile, outputImage):
 	read = open(inputFile,"r",encoding="utf-8")
 	data = read.readlines()

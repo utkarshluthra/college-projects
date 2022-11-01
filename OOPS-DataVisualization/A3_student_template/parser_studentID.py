@@ -1,6 +1,4 @@
-
 from preprocessData_studentID import cleanlist, preprocessLine, rid_tags
-from pprint import pprint
 
 class Parser:
 	"""docstring for ClassName"""

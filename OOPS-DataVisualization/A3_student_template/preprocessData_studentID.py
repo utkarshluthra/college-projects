@@ -1,4 +1,3 @@
-from pprint import pprint
 def rid_tags(mainstr,delim1="<",delim2=">"): #separate function to detect and delete data between two specific points
     while delim1 in mainstr and delim2 in mainstr[mainstr.index(delim1):]:
         index1 = mainstr.index(delim1)
